@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Outfit', sans-serif;
+    --font-display: 'Syne', sans-serif;
+
+    /* Light Theme (Fallback, but default is dark for crypto vibe) */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 190 90% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 280 80% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 190 90% 40%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Sleek Crypto Dark Theme - High Contrast for Readability */
+    --background: 240 10% 2%;
+    --foreground: 0 0% 100%;
+    --card: 240 10% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 10% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 190 90% 50%;
+    --primary-foreground: 240 10% 2%;
+    --secondary: 240 10% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 10% 10%;
+    --muted-foreground: 240 5% 80%;
+    --accent: 280 90% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 10% 15%;
+    --input: 240 10% 15%;
+    --ring: 190 90% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+}
+
+/* Custom Utilities for Premium Feel */
+@layer utilities {
+  .glass-panel {
+    @apply bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl shadow-black/20;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient;
+  }
+  .crypto-glow {
+    @apply relative before:absolute before:-inset-1 before:bg-gradient-to-r before:from-primary/20 before:to-accent/20 before:blur-xl before:-z-10;
+  }
+}
+
+/* Prosemirror (Tiptap) Editor Styles */
+.ProseMirror {
+  @apply outline-none min-h-[300px] text-lg leading-relaxed text-foreground antialiased;
+}
+.ProseMirror p {
+  @apply mb-6;
+}
+.ProseMirror h2 {
+  @apply text-3xl font-bold mt-10 mb-6 font-sans text-foreground;
+}
+.ProseMirror h3 {
+  @apply text-2xl font-bold mt-8 mb-4 font-sans text-foreground;
+}
+.ProseMirror ul {
+  @apply list-disc pl-6 mb-4 space-y-2 text-foreground/90;
+}
+.ProseMirror ol {
+  @apply list-decimal pl-6 mb-4 space-y-2 text-foreground/90;
+}
+.ProseMirror a {
+  @apply text-primary underline underline-offset-4 hover:text-primary/80 transition-colors;
+}
+.ProseMirror blockquote {
+  @apply border-l-4 border-primary pl-4 italic text-muted-foreground my-4;
+}
+.ProseMirror img {
+  @apply max-w-full h-auto rounded-xl my-6 shadow-lg;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply text-muted-foreground float-left h-0 pointer-events-none;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  animation: gradient 6s linear infinite;
+}
